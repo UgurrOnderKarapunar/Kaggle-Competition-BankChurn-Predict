@@ -1,0 +1,86 @@
+import joblib
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.preprocessing import RobustScaler, LabelEncoder
+from sklearn.feature_selection import SelectKBest, chi2
+from sklearn.impute import SimpleImputer, KNNImputer
+from sklearn.preprocessing import RobustScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import cross_validate
+from sklearn.metrics import make_scorer, accuracy_score, f1_score, recall_score
+from sklearn.ensemble import GradientBoostingClassifier
+
+# Display ayarları
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_colwidth', None)
+pd.set_option('display.width', 1000)
+pd.set_option('display.precision', 2)
+pd.set_option('display.float_format', '{:.2f}'.format)
+
+# Veri Yükleme
+path = "/kaggle/input/playground-series-s4e1/test.csv"
+train = pd.read_csv("/content/train.csv")
+test = pd.read_csv("/content/test.csv")
+sub = pd.read_csv("/content/sample_submission.csv")
+
+train.drop(columns=["CustomerId", "Surname"], axis=1, inplace=True)
+
+
+def preprocess1(dataframe):
+    print(f"DATA SHAPE")
+    print(dataframe.shape)
+
+    print("DATA ISNULL")
+    print(dataframe.isnull().sum())
+
+    print(f"DATA DESCRIBE")
+    print(dataframe.describe(include='all').T)
+
+    print(f"Before Change Dtype")
+    print(dataframe.info())
+
+    dataframe["HasCrCard"] = dataframe["HasCrCard"].astype(int)
+    dataframe["IsActiveMember"] = dataframe["IsActiveMember"].astype(int)
+    dataframe["Age"] = dataframe["Age"].astype(int)
+
+    print(f"After Change Dtype")
+    print(dataframe.info())
+
+    categorical_c = dataframe.select_dtypes(include="object").columns
+    numerical_c = dataframe.select_dtypes(include=["float64", "int64"]).columns
+    print(f"Before Deleted Dominant Cols:{categorical_c}")
+    return dataframe
+
+    doms_list = []
+    for col in categorical_c:
+        doms = dataframe[col].value_counts(normalize=True)
+        print(f"Dominant Cols:{col},{doms}")
+        if doms.max() > 0.80:
+            doms_list.append(col)
+    print(f"Before Dominant categories: {doms_list}")
+
+    dataframe.drop(doms_list, axis=1, inplace=True)
+    categorical_c = dataframe.select_dtypes(include="object").columns
+    print(f"After Deleted Dominant Cols:{categorical_c}")
+
+    correlation_matrix = dataframe[numerical_c].corr()
+    print("Correlation Matrix:")
+    print(correlation_matrix)
+
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f')
+    plt.title('Correlation Matrix')
+    plt.show()
+
+    return dataframe
+
+
+
+processed_train = preprocess1(train)
+
+joblib.dump(processed_train, 'preprocess_bank.pkl')
