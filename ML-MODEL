@@ -14,7 +14,6 @@ from sklearn.model_selection import cross_validate
 from sklearn.metrics import make_scorer, accuracy_score, f1_score, recall_score
 from sklearn.ensemble import GradientBoostingClassifier
 
-# Display ayarları
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_colwidth', None)
@@ -22,7 +21,6 @@ pd.set_option('display.width', 1000)
 pd.set_option('display.precision', 2)
 pd.set_option('display.float_format', '{:.2f}'.format)
 
-# Veri Yükleme
 path = "/kaggle/input/playground-series-s4e1/test.csv"
 train = pd.read_csv("/content/train.csv")
 test = pd.read_csv("/content/test.csv")
@@ -58,7 +56,6 @@ def model_ml(dataframe, target, targetsize, randomstate):
         ('scaler', RobustScaler())
     ])
 
-    # Column transformer to process the data
     process = ColumnTransformer([
         ('cat', categorical_pipi, categorical_c),
         ('num', numerical_pipi, numerical_c)
@@ -76,7 +73,6 @@ def model_ml(dataframe, target, targetsize, randomstate):
     # Train the model
     pipeline.fit(X_train, y_train)
 
-    # Save the trained pipeline
     joblib.dump(pipeline, 'model_pipeline.pkl')
     
     # Predict probabilities for the test set
