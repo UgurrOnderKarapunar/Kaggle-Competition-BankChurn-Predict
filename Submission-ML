@@ -1,0 +1,22 @@
+test = pd.read_csv("/content/test.csv")
+
+# Pipeline'ı yükle
+pipeline = joblib.load('model_pipeline_fitted.pkl')
+
+# Test veri setinde hedef değişkeni çıkar
+X_test = test.drop('Exited', axis=1, errors='ignore')
+
+# Test setinde tahmin yap
+y_test_pred_proba = pipeline.predict_proba(X_test)[:, 1]
+
+submission = pd.DataFrame({
+    'id': test['id'],  # Eğer test veri setinizde 'Id' varsa, aksi takdirde bu satırı güncelleyin
+    'Exited': y_test_pred_proba
+})
+
+# Submission dosyasını kaydet
+submission.to_csv('/content/submission.csv', index=False)
+
+
+Private Score:0.8875 Public Score:0.8806
+
