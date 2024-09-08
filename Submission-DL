@@ -1,0 +1,27 @@
+# Load the final model
+best_model = load_model('final_model.h5')
+
+# Preprocess the test data
+test = pd.read_csv("/content/test.csv")
+test.drop(columns=["CustomerId", "Surname"], axis=1, inplace=True)
+
+# Separate features from the test data
+X_test = test.copy()
+
+# Apply the preprocessing pipeline to the test data
+X_test_tn = process.transform(X_test)
+
+# Make predictions
+y_pred_proba = best_model.predict(X_test_tn)
+
+# Prepare the submission DataFrame
+submission = pd.DataFrame({
+    'id': test['id'],  # Make sure to include CustomerId if required
+    'Exited': y_pred_proba.flatten()    # Flatten to ensure it's a 1D array
+})
+
+# Save the submission file
+submission.to_csv("/content/submissionkeras.csv", index=False)
+
+
+Private Score:0.8850        Public Score:0.8806
