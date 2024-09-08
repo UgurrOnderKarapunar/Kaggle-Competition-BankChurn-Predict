@@ -9,5 +9,5 @@ pipeline = joblib.load('model_pipeline.pkl')
 pipeline.fit(X, y)
 y_pred_proba = pipeline.predict_proba(X)[:, 1]
 auc_score = roc_auc_score(y, y_pred_proba)
-print(f'Tüm veri üzerinde AUC skoru: {auc_score:.4f}') #### AUC score over all data: 0.8895
+print(f'TAUC score over all data: {auc_score:.4f}') #### AUC score over all data: 0.8895
 
