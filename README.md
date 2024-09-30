@@ -1,7 +1,7 @@
 
 
 
-![Fotoğraf]([https://example.com/foto.jpg](https://img.freepik.com/premium-photo/cheerful-female-bank-worker-having-meeting-with-two-clients_1022426-17643.jpg?size=626&ext=jpg))
+([https://example.com/foto.jpg](https://img.freepik.com/premium-photo/cheerful-female-bank-worker-having-meeting-with-two-clients_1022426-17643.jpg?size=626&ext=jpg))
 
 
 
