@@ -1,7 +1,4 @@
-
-https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNpRt6FwIA7ZC8avco5YSWYuKDfo2CFSqhKQ&s
-
-
+https://github.com/UgurrOnderKarapunar/Kaggle-Competition-BankChurn-Predict/blob/main/cheerful-female-bank-worker-having-meeting-with-two-clients_1022426-17643.jpg?raw=true
 
 
 
