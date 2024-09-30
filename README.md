@@ -1,4 +1,3 @@
-https://github.com/UgurrOnderKarapunar/Kaggle-Competition-BankChurn-Predict/blob/main/cheerful-female-bank-worker-having-meeting-with-two-clients_1022426-17643.jpg?raw=true
 
 
 
