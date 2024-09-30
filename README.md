@@ -1,7 +1,6 @@
 
+https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNpRt6FwIA7ZC8avco5YSWYuKDfo2CFSqhKQ&s
 
-
-([https://example.com/foto.jpg](https://img.freepik.com/premium-photo/cheerful-female-bank-worker-having-meeting-with-two-clients_1022426-17643.jpg?size=626&ext=jpg))
 
 
 
